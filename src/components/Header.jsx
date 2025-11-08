@@ -22,7 +22,7 @@ function Header() {
   <Link to='/' className='logo-link'>
     <div className='logo-text'>
       <PiFlowerLotus className='logo-icon' />
-      <span>Massage Shop</span>
+      <span>Sport Stadium</span>
     </div>
     <p className='logo-subtext'>Home</p>
   </Link>

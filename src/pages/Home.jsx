@@ -6,8 +6,8 @@ function Home() {
   return (
     <>
       <section className='heading'>
-        <h1>Massage Shop</h1>
-        <p>Welcome to Massage Shop Reservation System</p>
+        <h1>Sport Stadium</h1>
+        <p>Welcome to Sport Stadium Reservation System</p>
       </section>
 
       <Link to='/new-ticket' className='btn btn-reverse btn-block'>
