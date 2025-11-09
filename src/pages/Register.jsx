@@ -1,35 +1,30 @@
 import { useState, useEffect } from 'react'
-import { useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { FaUser } from 'react-icons/fa'
+import { MdAccountCircle } from 'react-icons/md'
 import { useSelector, useDispatch } from 'react-redux'
-import {register, reset} from '../features/auth/authSlice'
-import { MdAccountCircle } from "react-icons/md";
-
+import { register, reset } from '../features/auth/authSlice'
 
 function Register() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     password: '',
     password2: '',
     role: 'user'
-  });
+  })
 
-  const { name, email, password, password2, role } = formData;
+  const { name, email, phone, password, password2, role } = formData
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const {user,isLoading, isError, isSuccess,
-message}=useSelector((state)=>{
-      return state.auth
-})
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
 
-  useEffect(()=>{
-    if(isError){
+  useEffect(() => {
+    if (isError) {
       toast.error(message)
     }
-    //redirect when logged in
-    if(isSuccess || user){
+    if (isSuccess || user) {
       navigate('/')
     }
     dispatch(reset())
@@ -44,33 +39,33 @@ message}=useSelector((state)=>{
 
   const onSubmit = (e) => {
     e.preventDefault()
-
     if (password !== password2) {
       toast.error('Passwords do not match')
     } else {
-      const userData ={
+      const userData = {
         name,
         email,
+        phone,
         password,
         role
       }
       dispatch(register(userData))
+    }
   }
-}
 
   return (
     <>
       <section className='heading'>
         <h1
-  style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '10px',
-  }}
->
-  <MdAccountCircle size={70} /> Create an account
-</h1>
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '10px',
+          }}
+        >
+          <MdAccountCircle size={70} /> Create an account
+        </h1>
         <p>to start your massage reservation</p>
       </section>
 
@@ -97,6 +92,18 @@ message}=useSelector((state)=>{
               value={email}
               onChange={onChange}
               placeholder='Enter your email'
+              required
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='text'
+              className='form-control'
+              id='phone'
+              name='phone'
+              value={phone}
+              onChange={onChange}
+              placeholder='Enter your phone number'
               required
             />
           </div>
