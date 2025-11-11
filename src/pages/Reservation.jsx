@@ -60,7 +60,7 @@ const reservationService = {
       name: payload.name,
       phone: payload.phone,
       datetime: payload.datetime,
-      service: payload.service,
+      service: Array.isArray(payload.service) ? payload.service.join(", ") : payload.service,
       stadium: payload.stadium || { id: 'demo-stadium', name: 'Demo Stadium', lat: 13.736717, lon: 100.523186 },
       status: 'reserved',
       createdAt: new Date().toISOString(),
@@ -106,7 +106,7 @@ const reservationService = {
 // ---------------------- Reservation Page ----------------------
 export default function Reservation() {
   // form state
-  const [form, setForm] = useState({ name: '', phone: '', datetime: '', service: '' })
+  const [form, setForm] = useState({ name: '', phone: '', datetime: '', service: [] })
   // list of appointments
   const [appointments, setAppointments] = useState([])
   // loading indicator
@@ -163,7 +163,7 @@ export default function Reservation() {
 
       // add new reservation to state
       setAppointments(prev => [created, ...prev])
-      setForm({ name: '', phone: '', datetime: '', service: '' })
+      setForm({ name: '', phone: '', datetime: '', service: [] })
     } catch (e) {
       setError(e.message)
     } finally {
@@ -222,8 +222,38 @@ export default function Reservation() {
           </div>
           <div className="form-group">
             <label>Service</label>
-            <input className="input" value={form.service} onChange={e => setForm({ ...form, service: e.target.value })} placeholder="Service detail" />
-          </div>
+
+            <label style={{ display: 'block' }}>
+              <input 
+              type="checkbox" 
+              checked={form.service.includes("sport")}
+              onChange={e => {
+                if (e.target.checked) {
+                  setForm({ ...form, service: [...form.service, "sport"] })
+                } else {
+                  setForm({ ...form, service: form.service.filter(s => s !== "sport") })
+                }
+              }}
+    />
+    sport
+  </label>
+
+  <label style={{ display: 'block' }}>
+    <input 
+      type="checkbox" 
+      checked={form.service.includes("stadium")}
+      onChange={e => {
+        if (e.target.checked) {
+          setForm({ ...form, service: [...form.service, "stadium"] })
+        } else {
+          setForm({ ...form, service: form.service.filter(s => s !== "stadium") })
+        }
+      }}
+    />
+    stadium
+  </label>
+</div>
+
 
           {/* --------- BUTTONS --------- */}
           <div className="reservation-buttons">
