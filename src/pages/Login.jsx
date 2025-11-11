@@ -6,11 +6,13 @@ import { login, reset } from "../features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
+  // ✅ สร้าง state ให้ email/password เป็น string ว่างตั้งแต่แรก
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  // ✅ destructure หลังจาก state ถูกประกาศแล้ว
   const { email, password } = formData;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,15 +21,8 @@ function Login() {
   );
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message); // pop-up error
-    }
-
-    // redirect when logged in
-    if (isSuccess || user) {
-      navigate("/");
-    }
-
+    if (isError) toast.error(message);
+    if (isSuccess || user) navigate("/");
     dispatch(reset());
   }, [isError, isSuccess, user, message, navigate, dispatch]);
 
@@ -41,11 +36,8 @@ function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const userData = {
-      email,
-      password,
-    };
-
+    // ✅ ส่งข้อมูล email และ password ไป backend
+    const userData = { email, password };
     dispatch(login(userData));
   };
 
@@ -89,7 +81,7 @@ function Login() {
           <div className="form-group">
             <button className="btn btn-block">Login</button>
           </div>
-          {/* Forgot Password Link at the bottom */}
+
           <div className="mt-8 flex justify-center">
             <Link
               to="/forgotpassword"

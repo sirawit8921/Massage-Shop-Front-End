@@ -15,7 +15,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #1b951f;
+  color: #077BFF;
 }
 
 p {
@@ -81,7 +81,7 @@ h3 {
 }
 
 .header ul li a:hover {
-  color: #19dc26;
+  color: #077BFF;
   transform: scale(1.2);
 }
 
@@ -147,12 +147,12 @@ h3 {
 
 /* ✅ Hover effect for logo (entire clickable area) */
 .logo-link:hover .logo-text {
-  color: #19dc26;
+  color: #077BFF;
   transform: scale(1.08);
 }
 
 .logo-link:hover .logo-subtext {
-  color: #19dc26;
+  color: #077BFF;
   transform: scale(1.05);
 }
 
@@ -170,7 +170,7 @@ h3 {
 
 /* Paragraph below heading */
 .heading p {
-  color: #17b148;
+  color: #077BFF;
 }
 
 /* Heading */
@@ -182,7 +182,7 @@ h3 {
 }
 
 .heading p {
-  color: #17b148;
+  color: #077BFF;
 }
 
 /* Boxes */
@@ -540,4 +540,70 @@ footer {
 /* เพิ่มระยะห่างระหว่างหัวข้อกับฟอร์ม */
 .forgot-container form {
   margin-top: 1rem; /* ✅ ทำให้ฟอร์มเลื่อนลงมาจากหัวข้อ */
+}
+
+/* จัดเรียงปุ่มแนวนอนทางขวา */
+.reservation-buttons {
+  display: flex;
+  justify-content: flex-end; /* ✅ ชิดขวา */
+  gap: 15px; /* ✅ เพิ่มระยะห่างระหว่างปุ่ม */
+  margin-top: 15px; /* ✅ เพิ่มระยะห่างจาก input ด้านบน */
+}
+
+/* optional: ให้ปุ่มดูตอบสนองเมื่อ hover */
+.reservation-buttons .btn:hover {
+  background-color: #19dc26;
+  border-color: #19dc26;
+  color: #fff;
+  transform: scale(1.03);
+  transition: all 0.2s ease-in-out;
+}
+
+/* ============================= */
+/* ปุ่ม Reservation สีดำ (ทับทุกอย่างแน่นอน) */
+/* ============================= */
+.reservation-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-black {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 2px solid #000 !important;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-black:hover {
+  background-color: #19dc26 !important;
+  color: #fff !important;
+  border-color: #19dc26 !important;
+  transform: scale(1.05);
+}
+
+
+.btn-black-small {
+  background-color: #000;
+  color: #fff;
+  border: 1.5px solid #000;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-black-small:hover {
+  background-color: #19dc26;
+  border-color: #19dc26;
+  color: #fff;
+  transform: translateY(-1px);
 }

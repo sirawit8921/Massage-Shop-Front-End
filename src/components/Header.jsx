@@ -2,7 +2,7 @@ import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
-import { PiFlowerLotus } from "react-icons/pi";
+import { MdStadium } from "react-icons/md";
 
 
 function Header() {
@@ -21,7 +21,7 @@ function Header() {
       <div className='logo'>
   <Link to='/' className='logo-link'>
     <div className='logo-text'>
-      <PiFlowerLotus className='logo-icon' />
+      <MdStadium className='logo-icon' />
       <span>Sport Stadium</span>
     </div>
     <p className='logo-subtext'>Home</p>

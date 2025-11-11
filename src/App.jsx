@@ -7,8 +7,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword'
-import Reservation from './pages/reservation';
-import Appointment from './pages/appointment';
+import Reservation from './pages/Reservation';
+import Appointment from './pages/Appointment';
 
 
 function App() {

@@ -49,7 +49,7 @@ message}=useSelector((state)=>{
       toast.error('Passwords do not match')
     } else {
       const userData ={
-        name,
+        username: name,
         email,
         password,
         role
