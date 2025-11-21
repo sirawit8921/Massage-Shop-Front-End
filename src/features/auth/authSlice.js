@@ -2,7 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
 // ดึง user จาก localStorage
-const user = JSON.parse(localStorage.getItem('user'))
+let user = null;
+
+try {
+  const stored = localStorage.getItem("user");
+  user = stored ? JSON.parse(stored) : null;
+} catch (err) {
+  console.error("Invalid user JSON found in localStorage. Clearing it.");
+  localStorage.removeItem("user");
+}
+
 
 const initialState = {
   user: user ? user : null,
@@ -35,11 +44,6 @@ export const login = createAsyncThunk('auth/login', async(user,thunkAPI)=>{
     }
 })
 
-// Logout user
-export const logout = createAsyncThunk('auth/logout', async()=>{
-    await authService.logout()
-})
-
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -50,6 +54,9 @@ export const authSlice = createSlice({
       state.isSuccess = false
       state.message = ''
     },
+    logout: (state) => {
+      state.user = null
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -78,11 +85,10 @@ export const authSlice = createSlice({
         state.message = action.payload
         state.user=null
       })
-      .addCase(logout.fulfilled,(state)=>{
-        state.user = null
-      })
   },
 })
 
-export const { reset } = authSlice.actions
+
+
+export const { reset, logout } = authSlice.actions
 export default authSlice.reducer

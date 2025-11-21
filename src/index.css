@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Reset */
 * {
@@ -524,20 +527,36 @@ footer {
 }
 
 .forgot-container form input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   margin-top: 0.6rem;
-  margin-bottom: 0;
   display: block;
 }
 
+
 .forgot-container form button {
-  margin-top: 0rem; /* ✅ เพิ่มระยะห่างด้านบนของปุ่ม */
+  width: 100%;
+  padding: 12px;
+  background: #0a0b0b;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-.forgot-container p {
-  margin-top: 0.3rem; /* ✅ เว้นช่องห่างของข้อความแจ้งเตือน */
+.forgot-container form button:hover {
+  background: #0a0a0a;
 }
 
-/* เพิ่มระยะห่างระหว่างหัวข้อกับฟอร์ม */
+
+
+
 .forgot-container form {
-  margin-top: 1rem; /* ✅ ทำให้ฟอร์มเลื่อนลงมาจากหัวข้อ */
+  margin-top: 1rem;
 }

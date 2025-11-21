@@ -10,12 +10,14 @@ function Home() {
         <p>Welcome to Massage Shop Reservation System</p>
       </section>
 
-      <Link to='/new-ticket' className='btn btn-reverse btn-block'>
+      {/*Protected: Create Appointment */}
+      <Link to='/create-appointment' className='btn btn-reverse btn-block'>
         <SlCalender /> Create New Appointment
       </Link>
 
-      <Link to='/tickets' className='btn btn-block'>
-        <GrFormView size = {25} /> View My Appointments
+      {/*Protected: View Appointments */}
+      <Link to='/my-appointments' className='btn btn-block'>
+        <GrFormView size={25} /> View My Appointments
       </Link>
     </>
   )

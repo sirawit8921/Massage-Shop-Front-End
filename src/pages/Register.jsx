@@ -6,23 +6,25 @@ import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/authSlice'
 
 function Register() {
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    telephone: '',
     password: '',
-    password2: '',
+    confirmPassword: '',
     role: 'user'
   })
 
-  const { name, email, phone, password, password2, role } = formData
+  const { name, email, telephone, password, confirmPassword, role } = formData
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+  const { user, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      toast.error(message, { position: "top-center" })
     }
     if (isSuccess || user) {
       navigate('/')
@@ -31,39 +33,40 @@ function Register() {
   }, [isError, isSuccess, user, message, navigate, dispatch])
 
   const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
     }))
   }
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (password !== password2) {
-      toast.error('Passwords do not match')
-    } else {
-      const userData = {
-        name,
-        email,
-        phone,
-        password,
-        role
-      }
-      dispatch(register(userData))
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match", { position: "top-center" })
+      return
     }
+
+    const userData = {
+      name,
+      email,
+      telephone,
+      password,
+      role: "user",
+    }
+
+    dispatch(register(userData))
   }
 
   return (
     <>
       <section className='heading'>
-        <h1
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px',
-          }}
-        >
+        <h1 style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
+        }}>
           <MdAccountCircle size={70} /> Create an account
         </h1>
         <p>to start your massage reservation</p>
@@ -71,11 +74,11 @@ function Register() {
 
       <section className='form'>
         <form onSubmit={onSubmit}>
+          
           <div className='form-group'>
             <input
               type='text'
               className='form-control'
-              id='name'
               name='name'
               value={name}
               onChange={onChange}
@@ -83,11 +86,11 @@ function Register() {
               required
             />
           </div>
+
           <div className='form-group'>
             <input
               type='email'
               className='form-control'
-              id='email'
               name='email'
               value={email}
               onChange={onChange}
@@ -95,23 +98,23 @@ function Register() {
               required
             />
           </div>
+
           <div className='form-group'>
             <input
               type='text'
               className='form-control'
-              id='phone'
-              name='phone'
-              value={phone}
+              name='telephone'
+              value={telephone}
               onChange={onChange}
               placeholder='Enter your phone number'
               required
             />
           </div>
+
           <div className='form-group'>
             <input
               type='password'
               className='form-control'
-              id='password'
               name='password'
               value={password}
               onChange={onChange}
@@ -119,33 +122,23 @@ function Register() {
               required
             />
           </div>
+
           <div className='form-group'>
             <input
               type='password'
               className='form-control'
-              id='password2'
-              name='password2'
-              value={password2}
+              name='confirmPassword'
+              value={confirmPassword}
               onChange={onChange}
               placeholder='Confirm your password'
               required
             />
           </div>
-          <div className='form-group'>
-            <input
-              type='text'
-              className='form-control'
-              id='role'
-              name='role'
-              value={role}
-              onChange={onChange}
-              placeholder='Enter Your Role'
-              required
-            />
-          </div>
+
           <div className='form-group'>
             <button className='btn btn-block'>Submit</button>
           </div>
+
         </form>
       </section>
     </>

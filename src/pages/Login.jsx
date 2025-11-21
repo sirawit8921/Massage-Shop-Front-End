@@ -20,15 +20,16 @@ function Login() {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message); // pop-up error
+      toast.error(message, { position: "top-center" });
     }
 
     // redirect when logged in
     if (isSuccess || user) {
       navigate("/");
     }
-
+  return () => {
     dispatch(reset());
+  }
   }, [isError, isSuccess, user, message, navigate, dispatch]);
 
   const onChange = (e) => {

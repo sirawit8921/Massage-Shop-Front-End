@@ -21,7 +21,7 @@ export default function ForgotPassword() {
       const data = await res.json();
 
       if (data.success) {
-        setMessage("If this email exists, a reset link has been sent to your inbox.");
+        setMessage("A reset password link has been sent to your email, Please check your emil inbox.");
       } else {
         setMessage("Email not found or something went wrong.");
       }
@@ -33,59 +33,62 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="forgot-container bg-white p-10 rounded-2xl shadow-xl w-full max-w-md">
-        {/* Title */}
-        <h2 className="text-3xl font-bold mb-4 text-center text-black">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50 px-5">
+      {/* ⭐ ใช้ CSS จาก .forgot-container */}
+      <div className="forgot-container w-full max-w-xl bg-white p-10 rounded-2xl shadow-lg">
+
+        <h2 className="text-3xl font-bold mb-2 text-center text-black">
           Forgot Password
         </h2>
 
-        {/* Description */}
-        <p className="text-gray-600 text-sm mb-10 text-center">
-          Enter your email address and we'll send you a link to reset your password.
+        <p className="text-gray-600 text-center mb-10">
+          Enter your email and we will send you a link to reset your password.
         </p>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="mt-6 flex flex-col items-center space-y-6">
-          <div className="w-11/12">
-            <label className="block text-sm font-semibold mb-3 text-left">
-              Email Address
-            </label>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-6">
+            <label className="block text-sm font-semibold mb-2">Email Address</label>
+
             <input
               type="email"
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-400 transition"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg 
+                         focus:outline-none focus:ring-2 focus:ring-green-500"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-11/12 bg-green-600 text-white py-2.5 rounded-lg shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-200 font-semibold"
+            className="w-full bg-green-600 text-white py-3 rounded-lg shadow-md
+                       hover:bg-green-700 transition font-semibold 
+                       disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? "Sending..." : "Send Reset Link"}
           </button>
         </form>
 
-        {/* Message */}
         {message && (
-          <p className="text-center mt-8 text-sm font-medium text-gray-700">
+          <p className="text-center mt-6 text-sm font-medium text-gray-700">
             {message}
           </p>
         )}
+        <p
+          style={{ marginTop: "60px" }}
+          className="text-center text-sm"
+        >
+         <a
+           href="/login"
+           className="text-black hover:text-green-600 font-semibold transition"
+         >
+    ← Back to Login
+  </a>
+</p>
 
-        {/* Back to Login */}
-        <p className="text-center mt-10 text-sm">
-          <a
-            href="/login"
-            className="text-black hover:text-green-600 font-semibold transition-colors duration-200"
-          >
-            ← Back to Login
-          </a>
-        </p>
+
       </div>
     </div>
   );

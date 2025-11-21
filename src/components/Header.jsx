@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 import { PiFlowerLotus } from "react-icons/pi";
+import { toast } from 'react-toastify';
 
 
 function Header() {
@@ -10,11 +11,20 @@ function Header() {
     const dispatch = useDispatch()
     const {user} = useSelector((state)=>state.auth)
 
-    const onLogout = () =>{
-        dispatch(logout())
-        dispatch(reset())
-        navigate('/')
-    }
+    const onLogout = () => {
+    dispatch(logout());
+    dispatch(reset());
+    localStorage.removeItem("user");
+
+    toast.success("You have logged out!", {
+    position: "top-center",
+    autoClose: 1500,
+    hideProgressBar: true,
+  });
+
+  navigate("/", { replace: true });  // ⭐ กลับหน้า Home ทันที
+};
+
 
   return (
     <header className='header'>
